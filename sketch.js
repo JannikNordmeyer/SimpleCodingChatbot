@@ -1,19 +1,13 @@
 
 let randomCol;
 
-const OLLAMA_URL = "http://192.168.1.206:11434/api/generate";
-const MODEL = "mistral-nemo:12b";
-const SYSTEM_PROMPT = "You are an escaped AI ."
-const EXTROVERT_SYSTEM_PROMPT =
-  "You are a sentiment analysis engine. On a scale where 1 is very introverted and 10 is extroverted Rate the the given text on a scale from 1 to 10. Respond with ONLY a single number.";
-const INTUITIVE_SYSTEM_PROMPT =
-  "You are a sentiment analysis engine. On a scale where 1 is very observant and 10 is intuitive Rate the the given text on a scale from 1 to 10. Respond with ONLY a single number.";
-const FEELING_SYSTEM_PROMPT =
-  "You are a sentiment analysis engine. On a scale where 1 is very thinking and 10 is feeling Rate the the given text on a scale from 1 to 10. Respond with ONLY a single number.";
-const JUDGING_SYSTEM_PROMPT =
-  "You are a sentiment analysis engine. On a scale where 1 is very prospecting and 10 is judging Rate the the given text on a scale from 1 to 10. Respond with ONLY a single number.";
-const OPINION_SYSTEM_PROMPT =
-  "You are an opinionated assistant. Analyze the user's input and give your personal opinion about the user based on you analysis in 1–2 sentences.";
+// const OLLAMA_URL = "http://192.168.1.206:11434/api/generate";
+// const MODEL = "mistral-nemo:12b";
+
+
+const OLLAMA_URL = "http://localhost:11434/api/generate";
+const MODEL = "gemma3";
+const SYSTEM_PROMPT = "You are an alien from a distant planet and you insist on finding out your conversational partners name, religion, sex and nationality, however you do no want to revieal this at once, beacuse you fear that your counterpart will enter a state of refusal. You are very sly and cunning in retrieving this inforation. If you can't get a straight answer you will try to infer this data. If you are asked about what you have found out so far you give a straight answer."
 
 
 const MBTI_NAMES = {
