@@ -1,8 +1,10 @@
 
+var particles = [];
+var p;
+var spawncounter = 0;
 
-
-// const OLLAMA_URL = "http://192.168.1.206:11434/api/generate";
-// const MODEL = "mistral-nemo:12b";
+//const OLLAMA_URL = "http://192.168.1.206:11434/api/generate";
+//const MODEL = "mistral-nemo:12b";
 
 
 const OLLAMA_URL = "http://localhost:11434/api/generate";
@@ -17,7 +19,7 @@ spRec.interimResults = false; // allow partial recognition (faster, less accurat
 
 // var spRec = new p5.SpeechRec();  // Speech
 var foo; // speech synthesis object
-console.log('howdy');
+console.log('the sky is the limit');
 
 //spRec
 //spRec.onResult = showResult; // speech recognition object (will prompt for mic access)
@@ -27,7 +29,7 @@ function setup() {
   createCanvas(300, 300);
   background(200);
   foo = new p5.Speech()
-  foo.speak('hi there'); // say something
+  foo.speak('Let us have a conversation'); // say something
   console.log('in setup');
   foo.onLoad = voicesLoaded;
 
@@ -53,6 +55,8 @@ function setup() {
     foo.setVoice(1);
     foo.speak('Voices are loaded');
   }
+
+
 
   // End Speech
 
@@ -90,8 +94,10 @@ function setup() {
     if (reply == "ERR: No Reply Matched") {
       reply = await queryOllama();
     }
+    checkReplyLength(reply);
     output.html(reply);
     foo.speak(reply);
+    spawnParticles();
 
   }
 
@@ -122,3 +128,61 @@ function setup() {
     }
   }
 }
+
+function getRandomInt(max) { //random number
+  return Math.floor(Math.random() * max); //okruglenije number
+}
+
+function draw() {
+  background(45);
+
+  // for (var i = 0; i < 8; i++) //lets add 1-8 particles every frame (second codition is for number of particles)
+  //  {
+  //    p = new Particle();
+  //    particles.push(p);
+
+  // }
+  if (spawncounter > 0) {
+    spawnParticles();
+    spawncounter--;
+  }
+
+  for (i = 0; i < particles.length; i++) //now i call the methods on all particles; zykl
+  {
+    if (particles[i].alpha > 0) //only if particle is still visible, show them
+    {
+      particles[i].update(); //from p code take update method
+      particles[i].show();
+    } else  //remove them from array
+    {
+      particles.splice(i, 1); // i is particle, 1 / wie viel we want remove
+    }
+
+  }
+}
+
+function mousePressed() //when we click mouse, we want to add particles
+{
+  // spawnParticles();
+}
+
+function spawnParticles() {
+  var amountToSpawn = random(1, 20);
+  var randomAlpha = random(255);
+
+  for (var i = 0; i < amountToSpawn; i++) //add particles based on amoun
+  {
+    p = new Particle();
+    p.moveParticle(getRandomInt(50));
+    p.r = 128;
+    p.g = 95;
+    p.b = 217;
+    p.alpha = randomAlpha;
+    particles.push(p);
+  }
+}
+
+function checkReplyLength(reply) {
+  spawncounter = reply.length * 3.9; // Adjust the divisor to control the number of particles spawned based on reply length
+}
+
