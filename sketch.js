@@ -1,5 +1,3 @@
-const OLLAMA_URL = "http://192.168.1.206:11434/api/generate";
-const MODEL = "mistral-nemo:12b";
 
 var particles = [];
 var p;
@@ -33,7 +31,7 @@ function setup() {
   foo.speak('Let us have a conversation'); // say something
   console.log('in setup');
   foo.onLoad = voicesLoaded;
-  var speech = new p5.Speech()
+
 
   let brainScripts = ['SimCo_Brain.rive'];
   let riveScriptBot = new RiveScript();
@@ -68,17 +66,6 @@ function setup() {
   }
 
 
-
-  // End Speech
-
-  let brainScripts = ['SimCo_Brain.rive'];
-  let bot = new RiveScript();
-  bot.loadFile(brainScripts).then(brainReady).catch(BrainError);
-
-  let button = select('#submit');
-  let user_input = select('#user_input');
-  let output = select('#output');
-
   button.mousePressed(postUserInput);
 
   function brainReady() {
@@ -108,8 +95,6 @@ function setup() {
     output.html(reply);
     foo.speak(reply);
     spawnParticles();
-
-    speech.speak(reply);
   }
 
   //Posts the User Input to Ollama and Returns a Promise of the Reply.
